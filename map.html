@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+// Initialize and add the map
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: 40, lng: -75};
+  // The map, centered at Uluru
+  var map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  var marker = new google.maps.Marker({position: uluru, map: map});
+  google.maps.event.addListener(map, "click", function(event) {  
+    var lat = event.latLng.lat();  
+    var lng = event.latLng.lng();  
+    // 经纬度  
+    alert("Current location:Lat=" + lat + "; Lng=" + lng);  
+    document.getElementById("latitude").value = lat;
+    document.getElementById("longitude").value = lng;
+});  
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyASLIdz6f-shaGIAxWtcqjASYt78D_0XJE&callback=initMap">
+    </script>
+    <form action="map.php" method="post">
+<input type="hidden" id="latitude" name="latitude"/>
+<input type="hidden" id="longitude" name="longitude"/>
+<input type="date" name="date"/>
+<input type="time" name="time"/>
+<input type="submit" id="sub" value="submit" />
+
+
+  </body>
+</html>
